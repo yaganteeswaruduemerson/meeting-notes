@@ -1,0 +1,11 @@
+[
+  {
+    "id": "test_1",
+    "name": "test_agent.py::test_integration_end_to_end_summarization_and_email_flow",
+    "description": "Test: test_agent.py::test_integration_end_to_end_summarization_and_email_flow",
+    "type": "integration",
+    "status": "passed",
+    "duration": 0.0,
+    "error": null
+  }
+]
