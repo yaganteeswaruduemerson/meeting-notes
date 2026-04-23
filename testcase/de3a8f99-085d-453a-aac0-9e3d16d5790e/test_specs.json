@@ -1,0 +1,16 @@
+{
+  "name": "Functional - Followup Endpoint Answers Query",
+  "description": "Checks that the /followup endpoint returns a valid answer to a follow-up question when provided with a valid FollowUpQueryRequest.",
+  "test_type": "functional",
+  "input": "POST /followup with FollowUpQueryRequest containing a valid query_text and transcript_context.",
+  "output": "FollowUpQueryResponse with success=True and a non-empty answer.",
+  "success_criteria": [
+    "response.success is True",
+    "response.answer is not None and is a string",
+    "response.error is None"
+  ],
+  "error_scenarios": [
+    "LLMService.answer_follow_up returns FALLBACK_RESPONSE",
+    "Exception in MeetingNotesSummarizerAgent.answer_follow_up_query"
+  ]
+}
