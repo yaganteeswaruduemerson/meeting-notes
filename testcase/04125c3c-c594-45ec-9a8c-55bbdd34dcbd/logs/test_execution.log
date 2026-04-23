@@ -1,0 +1,50 @@
+=== PYTEST EXECUTION LOG ===
+
+Exit Code: 1
+
+STDOUT:
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.0.3, pluggy-1.6.0 -- /tmp/test_venv_exec_sahm8fi8/venv/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.11.15', 'Platform': 'Linux-5.15.0-1102-azure-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'asyncio': '1.3.0', 'anyio': '4.13.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}}
+rootdir: /tmp/test_venv_exec_sahm8fi8
+configfile: pytest.ini
+plugins: asyncio-1.3.0, anyio-4.13.0, json-report-1.5.0, metadata-3.1.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+test_agent.py::test_integration_followup_query_with_missing_context FAILED [100%]
+
+=================================== FAILURES ===================================
+_____________ test_integration_followup_query_with_missing_context _____________
+
+    def test_integration_followup_query_with_missing_context():
+        """
+        Integration test: Checks that when transcript_context is empty,
+        the /followup endpoint returns an error response.
+        """
+        client = TestClient(app)
+        payload = {
+            "query_text": "What did Alice agree to do?",
+            "transcript_context": ""
+        }
+        response = client.post("/followup", json=payload)
+        assert response.status_code in (422, 200)
+        data = response.json()
+        assert isinstance(data, dict)
+>       assert data.get("success") is False
+E       AssertionError: assert None is False
+E        +  where None = <built-in method get of dict object at 0x7f87e84c2140>('success')
+E        +    where <built-in method get of dict object at 0x7f87e84c2140> = {'detail': [{'ctx': {'error': {}}, 'input': '', 'loc': ['body', 'transcript_context'], 'msg': 'Value error, transcript_context cannot be empty', ...}]}.get
+
+test_agent.py:20: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  modules.guardrails.content_safety_service:content_safety_service.py:67 Content Safety disabled at runtime (client init failed): No module named 'azure'
+--------------------------------- JSON report ----------------------------------
+report saved to: /tmp/test_venv_exec_sahm8fi8/pytest_report.json
+=========================== short test summary info ============================
+FAILED test_agent.py::test_integration_followup_query_with_missing_context - ...
+============================== 1 failed in 0.77s ===============================
+
+
+STDERR:
