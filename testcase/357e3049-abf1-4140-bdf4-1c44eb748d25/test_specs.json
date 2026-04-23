@@ -1,0 +1,15 @@
+{
+  "name": "Functional - Consent Not Given Prevents Email Sending",
+  "description": "Ensures that if user_consent is False, the summary is generated but email is not sent and email_status is 'not_sent'.",
+  "test_type": "functional",
+  "input": "POST /summarize with MeetingNotesRequest where user_consent=False, valid participant_emails and user_email",
+  "output": "MeetingNotesResponse with success=True, summary present, email_status='not_sent'",
+  "success_criteria": [
+    "response.success is True",
+    "response.summary is not None",
+    "response.email_status == 'not_sent'"
+  ],
+  "error_scenarios": [
+    "ConsentManager.validate_consent returns False but email_status is not 'not_sent'"
+  ]
+}
