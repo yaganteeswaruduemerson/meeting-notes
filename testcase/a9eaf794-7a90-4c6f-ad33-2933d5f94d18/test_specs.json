@@ -1,0 +1,19 @@
+{
+  "name": "Functional - Summarize Endpoint Returns Structured Summary",
+  "description": "Validates that the /summarize endpoint returns a structured summary, action items, and attendees when provided with a valid MeetingNotesRequest.",
+  "test_type": "functional",
+  "input": "POST /summarize with MeetingNotesRequest containing valid input_type='text', input_value with a realistic transcript, summary_length='detailed', user_email, participant_emails, and user_consent=True.",
+  "output": "MeetingNotesResponse with success=True, non-empty summary, action_items, attendees, and email_status='sent'.",
+  "success_criteria": [
+    "response.success is True",
+    "response.summary is not None and contains expected sections",
+    "response.action_items is a list",
+    "response.attendees is a list",
+    "response.email_status == 'sent'"
+  ],
+  "error_scenarios": [
+    "LLMService.generate_summary returns FALLBACK_RESPONSE",
+    "LLMService.extract_action_items returns empty list",
+    "EmailSender.send_email returns False"
+  ]
+}
