@@ -1,0 +1,49 @@
+=== PYTEST EXECUTION LOG ===
+
+Exit Code: 1
+
+STDOUT:
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.0.3, pluggy-1.6.0 -- /tmp/aba_venv_cache/venv_e4e7ac0d5efa6b115634397a89cf4cea/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.11.15', 'Platform': 'Linux-5.15.0-1102-azure-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'asyncio': '1.3.0', 'anyio': '4.13.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}}
+rootdir: /tmp/test_venv_exec_uvgz488k
+configfile: pytest.ini
+plugins: asyncio-1.3.0, anyio-4.13.0, json-report-1.5.0, metadata-3.1.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+test_agent.py::test_integration_error_handling_on_invalid_input_type FAILED [100%]
+
+=================================== FAILURES ===================================
+____________ test_integration_error_handling_on_invalid_input_type _____________
+
+    @pytest.mark.asyncio
+    async def test_integration_error_handling_on_invalid_input_type():
+        """
+        Verifies that an unsupported input_type in MeetingNotesRequest triggers error handling and returns
+        MeetingNotesResponse with success=False and appropriate error message.
+        """
+        # Prepare input with invalid input_type
+>       req = MeetingNotesRequest(
+            input_type="invalid_type",
+            input_value="This is a valid transcript.",
+            summary_length="detailed",
+            user_email="user@example.com",
+            participant_emails=["a@example.com", "b@example.com"],
+            user_consent=True
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for MeetingNotesRequest
+E       input_type
+E         Value error, input_type must be one of {'file', 'text', 'chat_export'} [type=value_error, input_value='invalid_type', input_type=str]
+E           For further information visit https://errors.pydantic.dev/2.12/v/value_error
+
+test_agent.py:13: ValidationError
+--------------------------------- JSON report ----------------------------------
+report saved to: /tmp/test_venv_exec_uvgz488k/pytest_report.json
+=========================== short test summary info ============================
+FAILED test_agent.py::test_integration_error_handling_on_invalid_input_type
+============================== 1 failed in 0.85s ===============================
+
+
+STDERR:
