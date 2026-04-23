@@ -1,0 +1,8 @@
+{
+  "input_type": "string",
+  "input_value": "string",
+  "summary_length": "string",
+  "user_email": "string",
+  "participant_emails": "list",
+  "user_consent": "bool"
+}
