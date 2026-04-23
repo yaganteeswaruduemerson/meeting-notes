@@ -1,0 +1,21 @@
+{
+  "name": "Integration - End-to-End Summarization and Email Flow",
+  "description": "Tests the full workflow from input normalization, preprocessing, LLM summary generation, action item extraction, formatting, consent validation, to email sending.",
+  "test_type": "integration",
+  "input": "MeetingNotesRequest with valid transcript, summary_length, user_email, participant_emails, user_consent=True passed to MeetingNotesSummarizerAgent.process_meeting_notes",
+  "output": "MeetingNotesResponse with all fields populated and email_status='sent'",
+  "success_criteria": [
+    "InputHandler.receive_input is called and returns normalized input",
+    "Preprocessor.normalize_text is called and returns cleaned text",
+    "LLMService.generate_summary is called and returns summary",
+    "LLMService.extract_action_items is called and returns action items",
+    "SummaryFormatter.format_summary is called and returns formatted summary",
+    "ConsentManager.validate_consent returns True",
+    "EmailSender.send_email is called and returns True",
+    "MeetingNotesResponse.success is True"
+  ],
+  "error_scenarios": [
+    "Any service returns an error or None",
+    "EmailSender.send_email returns False"
+  ]
+}
