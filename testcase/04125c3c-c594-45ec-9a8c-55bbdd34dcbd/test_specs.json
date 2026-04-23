@@ -1,0 +1,15 @@
+{
+  "name": "Integration - Follow-up Query with Missing Context",
+  "description": "Checks that when transcript_context is empty, the follow-up endpoint returns an error response.",
+  "test_type": "integration",
+  "input": "POST /followup with FollowUpQueryRequest where transcript_context is an empty string.",
+  "output": "FollowUpQueryResponse with success=False and appropriate error message.",
+  "success_criteria": [
+    "response.success is False",
+    "response.error contains 'transcript_context cannot be empty' or fallback error"
+  ],
+  "error_scenarios": [
+    "Validation error in FollowUpQueryRequest",
+    "Exception in MeetingNotesSummarizerAgent.answer_follow_up_query"
+  ]
+}
