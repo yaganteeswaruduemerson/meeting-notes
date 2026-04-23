@@ -1,0 +1,11 @@
+[
+  {
+    "id": "test_1",
+    "name": "test_agent.py::test_integration_followup_query_with_missing_context",
+    "description": "Test: test_agent.py::test_integration_followup_query_with_missing_context",
+    "type": "integration",
+    "status": "failed",
+    "duration": 0.0,
+    "error": "def test_integration_followup_query_with_missing_context():\n        \"\"\"\n        Integration test: Checks that when transcript_context is empty,\n        the /followup endpoint returns an error response.\n        \"\"\"\n        client = TestClient(app)\n        payload = {\n            \"query_text\": \"What did Alice agree to do?\",\n            \"transcript_context\": \"\"\n        }\n        response = client.post(\"/followup\", json=payload)\n        assert response.status_code in (422, 200)\n        data = response.json()\n        assert isinstance(data, dict)\n>       assert data.get(\"success\") is False\nE       AssertionError: assert None is False\nE        +  where None = <built-in method get of dict object at 0x7f87e84c2140>('success')\nE        +    where <built-in method get of dict object at 0x7f87e84c2140> = {'detail': [{'ctx': {'error': {}}, 'input': '', 'loc': ['body', 'transcript_context'], 'msg': 'Value error, transcript_context cannot be empty', ...}]}.get\n\ntest_agent.py:20: AssertionError"
+  }
+]
