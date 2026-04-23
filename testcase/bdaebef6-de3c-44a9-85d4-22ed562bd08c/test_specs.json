@@ -1,0 +1,16 @@
+{
+  "name": "Integration - Follow-up Query with Missing Context",
+  "description": "Checks that if transcript_context is empty or missing, the agent returns a FollowUpQueryResponse with success=False and an error message.",
+  "test_type": "integration",
+  "input": "FollowUpQueryRequest with valid query_text but empty transcript_context",
+  "output": "FollowUpQueryResponse with success=False and error message",
+  "success_criteria": [
+    "FollowUpQueryRequest validation fails",
+    "FollowUpQueryResponse.success is False",
+    "FollowUpQueryResponse.error contains appropriate message"
+  ],
+  "error_scenarios": [
+    "ValueError raised by FollowUpQueryRequest.field_validator",
+    "Exception in MeetingNotesSummarizerAgent.answer_follow_up_query"
+  ]
+}
