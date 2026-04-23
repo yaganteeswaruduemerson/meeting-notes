@@ -1,0 +1,11 @@
+[
+  {
+    "id": "test_1",
+    "name": "test_agent.py::test_integration_error_handling_on_invalid_input_type",
+    "description": "Test: test_agent.py::test_integration_error_handling_on_invalid_input_type",
+    "type": "integration",
+    "status": "failed",
+    "duration": 0.0,
+    "error": "@pytest.mark.asyncio\n    async def test_integration_error_handling_on_invalid_input_type():\n        \"\"\"\n        Verifies that an unsupported input_type in MeetingNotesRequest triggers error handling and returns\n        MeetingNotesResponse with success=False and appropriate error message.\n        \"\"\"\n        # Prepare input with invalid input_type\n>       req = MeetingNotesRequest(\n            input_type=\"invalid_type\",\n            input_value=\"This is a valid transcript.\",\n            summary_length=\"detailed\",\n            user_email=\"user@example.com\",\n            participant_emails=[\"a@example.com\", \"b@example.com\"],\n            user_consent=True\n        )\nE       pydantic_core._pydantic_core.ValidationError: 1 validation error for MeetingNotesRequest\nE       input_type\nE         Value error, input_type must be one of {'file', 'text', 'chat_export'} [type=value_error, input_value='invalid_type', input_type=str]\nE           For further information visit https://errors.pydantic.dev/2.12/v/value_error\n\ntest_agent.py:13: ValidationError"
+  }
+]
