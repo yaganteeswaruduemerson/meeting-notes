@@ -1,0 +1,17 @@
+{
+  "name": "Integration - Error Handling on Invalid Input Type",
+  "description": "Verifies that an unsupported input_type in MeetingNotesRequest triggers error handling and returns a MeetingNotesResponse with success=False and appropriate error message.",
+  "test_type": "integration",
+  "input": "MeetingNotesRequest with input_type='invalid_type', valid input_value",
+  "output": "MeetingNotesResponse with success=False and error message",
+  "success_criteria": [
+    "InputHandler.receive_input returns empty string",
+    "ErrorHandler.handle_error is called with 'GENERIC_ERROR'",
+    "MeetingNotesResponse.success is False",
+    "MeetingNotesResponse.error contains fallback or specific error message"
+  ],
+  "error_scenarios": [
+    "Exception in InputHandler.receive_input",
+    "MeetingNotesSummarizerAgent.process_meeting_notes returns None"
+  ]
+}
