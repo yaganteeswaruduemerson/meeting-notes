@@ -1,0 +1,11 @@
+[
+  {
+    "id": "test_1",
+    "name": "Functional - Followup Endpoint Answers Query",
+    "description": "Test: Functional - Followup Endpoint Answers Query",
+    "type": "functional",
+    "status": "passed",
+    "duration": 0.0,
+    "error": null
+  }
+]
